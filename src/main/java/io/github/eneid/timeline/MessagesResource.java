@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/timeline")
+@RequestMapping("/api/timeline")
 public class MessagesResource {
 
     private final MessagesRepository messagesRepository;
