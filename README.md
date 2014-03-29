@@ -7,5 +7,5 @@ Serves Eneid APIs.
 ## Startup
 
 ```
- $> TODO
+ $> ./run.sh
 ```
