@@ -1,7 +1,5 @@
 package io.github.eneid.actions;
 
-import io.github.eneid.actions.domain.QuickAction;
-import io.github.eneid.actions.repository.QuickActionRepository;
 import io.github.eneid.auth.AccountsRepository;
 import io.github.eneid.timeline.Message;
 import io.github.eneid.timeline.MessagesRepository;
@@ -19,15 +17,15 @@ import java.util.Date;
 @RequestMapping("/api/actions")
 public class QuickActionResource {
 
-    private final QuickActionRepository quickActionRepository;
+    private final QuickActionsRepository quickActionsRepository;
     private final MessagesRepository messagesRepository;
     private final AccountsRepository accountsRepository;
 
     @Autowired
-    public QuickActionResource(QuickActionRepository quickActionRepository,
+    public QuickActionResource(QuickActionsRepository quickActionsRepository,
                                MessagesRepository messagesRepository,
                                AccountsRepository accountsRepository) {
-        this.quickActionRepository = quickActionRepository;
+        this.quickActionsRepository = quickActionsRepository;
         this.messagesRepository = messagesRepository;
         this.accountsRepository = accountsRepository;
     }
@@ -37,7 +35,7 @@ public class QuickActionResource {
             method = RequestMethod.GET
     )
     public Iterable<QuickAction> getAvailableActions() {
-        return quickActionRepository.findAll();
+        return quickActionsRepository.findAll();
 
     }
 
@@ -46,7 +44,7 @@ public class QuickActionResource {
             method = RequestMethod.POST
     )
     public void save(@RequestParam("name") String name) {
-        quickActionRepository.save(new QuickAction(name));
+        quickActionsRepository.save(new QuickAction(name));
 
     }
 
@@ -57,7 +55,7 @@ public class QuickActionResource {
     )
     public void putAction(@RequestParam("id") Long id,
                                        @AuthenticationPrincipal User currentUser) {
-        QuickAction found = quickActionRepository.findOne(id);
+        QuickAction found = quickActionsRepository.findOne(id);
         if (found != null ){
             Message message = new Message();
             message.setAuthor(accountsRepository.findOne(currentUser.getUsername()));

@@ -1,6 +1,6 @@
 package io.github.eneid.timeline;
 
-import io.github.eneid.actions.domain.QuickAction;
+import io.github.eneid.actions.QuickAction;
 import io.github.eneid.auth.Account;
 
 import javax.persistence.*;

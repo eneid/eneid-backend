@@ -1,4 +1,4 @@
-package io.github.eneid.actions.domain;
+package io.github.eneid.actions;
 
 
 import javax.persistence.*;
