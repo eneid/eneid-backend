@@ -3,10 +3,7 @@ package io.github.eneid.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -33,7 +30,8 @@ public class AccountsResource {
 
     @RequestMapping(
             value = {"users", "users/"},
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            consumes = "application/x-www-form-urlencoded"
     )
     public void update(@RequestParam("email") String email,
                        @RequestParam("password") String password,
@@ -48,6 +46,21 @@ public class AccountsResource {
                 "insert into authorities(username, authority) values (?, ?);",
                 email, "USER");
     }
+
+    @RequestMapping(
+                value = {"users", "users/"},
+                method = RequestMethod.POST,
+                consumes = "application/json"
+        )
+        public void update(@RequestBody Account user) {
+            jdbcTemplate.update(
+                    "insert into users(username, password, name, first_name, enabled) values (?, ?, ?, ?, true);",
+                    user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName());
+
+            jdbcTemplate.update(
+                    "insert into authorities(username, authority) values (?, ?);",
+                    user.getEmail(), "USER");
+        }
 
     @RequestMapping(
             value = {"users", "users/"},
