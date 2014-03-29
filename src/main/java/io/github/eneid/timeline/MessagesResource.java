@@ -2,7 +2,6 @@ package io.github.eneid.timeline;
 
 import io.github.eneid.auth.Account;
 import io.github.eneid.auth.AccountsRepository;
-import io.github.eneid.auth.AccountsResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

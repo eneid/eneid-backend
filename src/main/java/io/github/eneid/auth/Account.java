@@ -1,8 +1,5 @@
 package io.github.eneid.auth;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
