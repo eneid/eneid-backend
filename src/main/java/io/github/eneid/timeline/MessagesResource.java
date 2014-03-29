@@ -1,5 +1,6 @@
 package io.github.eneid.timeline;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/timeline")
 public class MessagesResource {
 
+    private final MessagesRepository messagesRepository;
+
+    @Autowired
+    public MessagesResource(MessagesRepository messagesRepository) {
+        this.messagesRepository = messagesRepository;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
-    public String helloWorld() {
-        return "hello marouane";
+    public Iterable<Message> helloWorld() {
+        return messagesRepository.findAll();
     }
 }
