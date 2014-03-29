@@ -9,3 +9,19 @@ Serves Eneid APIs.
 ```
  $> ./run.sh
 ```
+
+## Deploy
+
+### Setup
+
+ 1. download Heroku Toolbet
+ 1. run `heroku keys:add`
+ 1. be added as collaborator to https://dashboard.heroku.com/apps/eneid-api/
+
+### Deploy
+
+Run 
+
+```
+ $> ./deploy.sh
+```
