@@ -1,5 +1,6 @@
 package io.github.eneid.auth;
 
+import io.github.eneid.community.CommunityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,9 @@ public class AccountsResource {
 
     @Autowired
     AccountsRepository repository;
+
+    @Autowired
+    CommunityRepository communityRepository;
 
     @RequestMapping(
             value = {"login", "login/"},
@@ -36,13 +40,15 @@ public class AccountsResource {
     public void update(@RequestParam("email") String email,
                        @RequestParam("password") String password,
                        @RequestParam("name") String name,
-                       @RequestParam("firstName") String firstName
+                       @RequestParam("firstName") String firstName,
+                       @RequestParam(value = "communityId", required = false) Long communityId
     ) {
         Account user = new Account();
         user.setEmail(email);
         user.setPassword(password);
         user.setName(name);
         user.setFirstName(firstName);
+        user.setCommunity(communityRepository.findOne(communityId));
         update(user);
     }
 
@@ -53,8 +59,8 @@ public class AccountsResource {
     )
     public void update(@RequestBody Account user) {
         jdbcTemplate.update(
-                "insert into users(username, password, name, first_name, enabled) values (?, ?, ?, ?, true);",
-                user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName());
+                "insert into users(username, password, name, first_name, enabled, community) values (?, ?, ?, ?, true, ?);",
+                user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName(), user.getCommunityId());
 
         jdbcTemplate.update(
                 "insert into authorities(username, authority) values (?, ?);",

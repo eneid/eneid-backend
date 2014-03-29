@@ -1,9 +1,8 @@
 package io.github.eneid.auth;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import io.github.eneid.community.Community;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -13,6 +12,8 @@ public class Account  {
     private String firstName;
     private String name;
     private String password;
+    private Community community;
+    private String communityId;
 
 
     @Id
@@ -50,5 +51,23 @@ public class Account  {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "community", nullable = true)
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public String getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(String communityId) {
+        this.communityId = communityId;
     }
 }
