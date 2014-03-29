@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp 'target/classes:target/dependency/*' io.github.eneid.Application
+web: java $JAVA_OPTS -jar target/*.jar
