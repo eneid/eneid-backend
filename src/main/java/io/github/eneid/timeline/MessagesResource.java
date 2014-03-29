@@ -1,0 +1,15 @@
+package io.github.eneid.timeline;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/timeline")
+public class MessagesResource {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String helloWorld() {
+        return "hello marouane";
+    }
+}
