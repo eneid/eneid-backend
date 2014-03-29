@@ -1,6 +1,12 @@
 package io.github.eneid.actions.domain;
 
 
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name = "actions")
 public class QuickAction {
     private Long id;
     private String name;
@@ -8,11 +14,13 @@ public class QuickAction {
     public QuickAction() {
     }
 
-    public QuickAction(Long id, String name) {
-        this.id = id;
+    public QuickAction(String name) {
         this.name = name;
     }
 
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
     }
@@ -21,6 +29,7 @@ public class QuickAction {
         this.id = id;
     }
 
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }

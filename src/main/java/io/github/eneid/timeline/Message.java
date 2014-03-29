@@ -1,5 +1,6 @@
 package io.github.eneid.timeline;
 
+import io.github.eneid.actions.domain.QuickAction;
 import io.github.eneid.auth.Account;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Message {
     private Account author;
     private Date date;
     private String contents;
+    private QuickAction action;
 
 
     @Id
@@ -54,5 +56,15 @@ public class Message {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "action", nullable = true)
+    public QuickAction getAction() {
+        return action;
+    }
+
+    public void setAction(QuickAction action) {
+        this.action = action;
     }
 }

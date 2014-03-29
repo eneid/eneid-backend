@@ -1,26 +1,19 @@
 package io.github.eneid.migration;
 
 import com.googlecode.flyway.core.Flyway;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
-@Component
+@Configuration
 public class Migrator {
 
-    private final Flyway migrator;
-
-    @Autowired
-    public Migrator(DataSource dataSource) {
-        migrator = new Flyway();
+    @Bean
+    public Flyway flyWay(DataSource dataSource) {
+        Flyway migrator = new Flyway();
         migrator.setDataSource(dataSource);
-    }
-
-    @PostConstruct
-    public void migrate() {
-        migrator.migrate();
+        return migrator;
     }
 
 }

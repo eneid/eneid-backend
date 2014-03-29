@@ -6,19 +6,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
-@Table(name = "accounts")
+@Table(name = "users")
 public class Account {
 
-    private long id;
+    private String username;
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id", nullable = false)
-    public long getId() {
-        return id;
+    @Column(name = "username", nullable = false)
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
