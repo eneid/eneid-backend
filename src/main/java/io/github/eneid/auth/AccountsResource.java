@@ -38,29 +38,28 @@ public class AccountsResource {
                        @RequestParam("name") String name,
                        @RequestParam("firstName") String firstName
     ) {
-        jdbcTemplate.update(
-                "insert into users(username, password, name, first_name, enabled) values (?, ?, ?, ?, true);",
-                email, encoder.encode(password), name, firstName);
-
-        jdbcTemplate.update(
-                "insert into authorities(username, authority) values (?, ?);",
-                email, "USER");
+        Account user = new Account();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setName(name);
+        user.setFirstName(firstName);
+        update(user);
     }
 
     @RequestMapping(
-                value = {"users", "users/"},
-                method = RequestMethod.POST,
-                consumes = "application/json"
-        )
-        public void update(@RequestBody Account user) {
-            jdbcTemplate.update(
-                    "insert into users(username, password, name, first_name, enabled) values (?, ?, ?, ?, true);",
-                    user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName());
+            value = {"users", "users/"},
+            method = RequestMethod.POST,
+            consumes = "application/json"
+    )
+    public void update(@RequestBody Account user) {
+        jdbcTemplate.update(
+                "insert into users(username, password, name, first_name, enabled) values (?, ?, ?, ?, true);",
+                user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName());
 
-            jdbcTemplate.update(
-                    "insert into authorities(username, authority) values (?, ?);",
-                    user.getEmail(), "USER");
-        }
+        jdbcTemplate.update(
+                "insert into authorities(username, authority) values (?, ?);",
+                user.getEmail(), "USER");
+    }
 
     @RequestMapping(
             value = {"users", "users/"},

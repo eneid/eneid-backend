@@ -7,10 +7,7 @@ import io.github.eneid.auth.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -39,14 +36,13 @@ public class MessagesResource {
     }
 
     @RequestMapping(value = {"timeline", "timeline/"},
-            method = RequestMethod.POST)
-    public void pushMessage(@RequestParam("content") String contents,
+            method = RequestMethod.POST,
+            consumes = "application/json")
+    public void pushMessage(@RequestBody Message message,
                             @AuthenticationPrincipal User currentUser) {
 
-        Message message = new Message();
         message.setDate(new Date());
         message.setAuthor(accountRepository.findOne(currentUser.getUsername()));
-        message.setContents(contents);
         messagesRepository.save(message);
     }
 
