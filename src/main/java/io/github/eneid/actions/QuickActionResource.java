@@ -18,7 +18,7 @@ public class QuickActionResource {
             method = RequestMethod.GET
     )
     public List<QuickAction> getAvailableActions() {
-        return newArrayList();
+        return newArrayList(new QuickAction(1L, "Il/Elle est mort(e) !"));
 
     }
 }
