@@ -2,7 +2,7 @@ package io.github.eneid.actions;
 
 import io.github.eneid.actions.domain.QuickAction;
 import io.github.eneid.actions.repository.QuickActionRepository;
-import io.github.eneid.auth.AccountRepository;
+import io.github.eneid.auth.AccountsRepository;
 import io.github.eneid.timeline.Message;
 import io.github.eneid.timeline.MessagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/actions")
@@ -22,12 +21,12 @@ public class QuickActionResource {
 
     private final QuickActionRepository quickActionRepository;
     private final MessagesRepository messagesRepository;
-    private final AccountRepository accountsRepository;
+    private final AccountsRepository accountsRepository;
 
     @Autowired
     public QuickActionResource(QuickActionRepository quickActionRepository,
                                MessagesRepository messagesRepository,
-                               AccountRepository accountsRepository) {
+                               AccountsRepository accountsRepository) {
         this.quickActionRepository = quickActionRepository;
         this.messagesRepository = messagesRepository;
         this.accountsRepository = accountsRepository;

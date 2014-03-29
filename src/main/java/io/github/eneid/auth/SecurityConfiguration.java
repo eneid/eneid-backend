@@ -29,12 +29,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, Flyway flyway) throws Exception {
-        // create schema before adding users
         flyway.migrate();
         auth
             .jdbcAuthentication()
                 .dataSource(dataSource)
-                //.withDefaultSchema()
                 .withUser("user").password("password").roles("USER").and()
                 .withUser("admin").password("password").roles("USER", "ADMIN");
     }
