@@ -12,6 +12,8 @@ public class Account  {
     private String email;
     private String firstName;
     private String name;
+    private String password;
+
 
     @Id
     @Column(name = "username", nullable = false)
@@ -39,5 +41,14 @@ public class Account  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "password", nullable = false)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

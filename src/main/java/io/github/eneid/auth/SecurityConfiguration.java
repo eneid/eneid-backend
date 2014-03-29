@@ -39,12 +39,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, Flyway flyway) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth, Flyway flyway, PasswordEncoder encoder) throws Exception {
         flyway.migrate();
+        String password = encoder.encode("password");
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .withUser("jj@gmail.com").password("test").roles("USER").and()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("password").roles("USER", "ADMIN");
+                .passwordEncoder(encoder)
+                .withUser("user").password(password).roles("USER").and()
+                .withUser("admin").password(password).roles("USER", "ADMIN");
     }
 }
