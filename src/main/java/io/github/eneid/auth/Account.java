@@ -1,6 +1,7 @@
 package io.github.eneid.auth;
 
 import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 

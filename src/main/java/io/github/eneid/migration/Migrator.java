@@ -2,8 +2,6 @@ package io.github.eneid.migration;
 
 import com.googlecode.flyway.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

@@ -16,7 +16,7 @@ public class MessagesResource {
         this.messagesRepository = messagesRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public Iterable<Message> helloWorld() {
         return messagesRepository.findAll();
     }
