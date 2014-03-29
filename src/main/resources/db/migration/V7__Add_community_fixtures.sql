@@ -1,0 +1,1 @@
+insert into communities values (1, 'Le monde de Jacques Martin');

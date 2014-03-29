@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users").permitAll();
 
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/api/**").hasRole("USER")
+                .antMatchers("/**").hasRole("USER")
                 .anyRequest().anonymous()
                 .and()
                 .httpBasic();
