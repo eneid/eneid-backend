@@ -8,7 +8,8 @@ CREATE TABLE `messages` (
   `date` datetime NOT NULL,
   `contents` text NOT NULL,
   `author` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT FOREIGN KEY (`author`) REFERENCES `accounts` (`id`)
+  PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8;
+
+ALTER TABLE `messages` ADD FOREIGN KEY (`author`) REFERENCES `accounts`(`id`);
 
