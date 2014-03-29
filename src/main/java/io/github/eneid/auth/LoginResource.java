@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/api/login")
 public class LoginResource {
 
     @RequestMapping(
@@ -15,7 +15,7 @@ public class LoginResource {
     )
     public String logMeIn(@RequestParam("login") String login,
                           @RequestParam("password") String password) {
-        
+
         return "login " + login + " passwd " + password;
     }
 }
