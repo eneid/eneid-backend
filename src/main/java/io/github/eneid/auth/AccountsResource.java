@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 @RequestMapping("/api")
 public class AccountsResource {
@@ -21,6 +23,10 @@ public class AccountsResource {
 
     @Autowired
     CommunityRepository communityRepository;
+
+    @PostConstruct
+    public void setUp() {
+    }
 
     @RequestMapping(
             value = {"login", "login/"},

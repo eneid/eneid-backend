@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(encoder)
-                .withUser("user").password(password).roles("USER").and()
+                .withUser("o.girardot@lateral-thoughts.com").password(password).roles("USER").and()
                 .withUser("admin").password(password).roles("USER", "ADMIN");
     }
 }
