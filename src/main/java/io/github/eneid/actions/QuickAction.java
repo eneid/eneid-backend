@@ -3,11 +3,13 @@ package io.github.eneid.actions;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "actions")
-public class QuickAction {
+public class QuickAction implements Serializable {
     private Long id;
     private String name;
 

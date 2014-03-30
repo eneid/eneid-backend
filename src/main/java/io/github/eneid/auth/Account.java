@@ -5,19 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.eneid.community.Community;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
-@JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class Account  {
+public class Account implements Serializable{
 
     private String email;
     private String firstName;
     private String name;
     private String password;
     private Community community;
-
-    @JsonIgnore
     private transient String communityId;
 
 

@@ -4,13 +4,14 @@ import io.github.eneid.actions.QuickAction;
 import io.github.eneid.auth.Account;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "messages")
-public class Message {
+public class Message implements Serializable {
 
     private long id;
     private Account author;
