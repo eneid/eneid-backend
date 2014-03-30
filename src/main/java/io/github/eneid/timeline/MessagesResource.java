@@ -39,6 +39,19 @@ public class MessagesResource {
         message.setDate(new Date());
         message.setAuthor(account);
         messagesRepository.save(message);
+
+        account = new Account();
+        account.setEmail("sebastian.lemerdy@gmail.com");
+        account.setFirstName("Sebastian");
+        account.setName("Le Merdy");
+        account.setPassword("password");
+        accountRepository.save(account);
+
+        message = new Message();
+        message.setContents("Cool, je l'appelerai demain.");
+        message.setDate(new Date());
+        message.setAuthor(account);
+        messagesRepository.save(message);
     }
 
     @RequestMapping(value = {"timeline", "timeline/"},
