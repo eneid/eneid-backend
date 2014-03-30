@@ -3,7 +3,7 @@ package io.github.eneid.auth;
 import io.github.eneid.community.CommunityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,10 +14,10 @@ public class AccountsResource {
     JdbcTemplate jdbcTemplate;
 
     @Autowired
-    PasswordEncoder encoder;
+    BCryptPasswordEncoder encoder;
 
     @Autowired
-    AccountsRepository repository;
+    AccountsRepository accountsRepository;
 
     @Autowired
     CommunityRepository communityRepository;
@@ -26,10 +26,13 @@ public class AccountsResource {
             value = {"login", "login/"},
             method = RequestMethod.GET
     )
-    public String logMeIn(@RequestParam("login") String login,
-                          @RequestParam("password") String password) {
+    public void login(@RequestParam("login") String login,
+                      @RequestParam("password") String password) {
 
-        return "login " + login + " passwd " + password;
+        Account account = accountsRepository.findByEmail(login);
+        if (account == null || !encoder.matches(password, account.getPassword())) {
+            throw new RuntimeException("User not found");
+        }
     }
 
     @RequestMapping(
@@ -41,8 +44,7 @@ public class AccountsResource {
                        @RequestParam("password") String password,
                        @RequestParam("name") String name,
                        @RequestParam("firstName") String firstName,
-                       @RequestParam(value = "communityId", required = false) Long communityId
-    ) {
+                       @RequestParam(value = "communityId", required = false) Long communityId) {
         Account user = new Account();
         user.setEmail(email);
         user.setPassword(password);
@@ -72,7 +74,7 @@ public class AccountsResource {
             method = RequestMethod.GET
     )
     public Iterable<Account> findAll() {
-        return repository.findAll();
+        return accountsRepository.findAll();
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -27,20 +26,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users").permitAll();
 
         http.csrf().disable().authorizeRequests()
+                .antMatchers("/api/login", "/api/login/").permitAll()
                 .antMatchers("/**").hasRole("USER")
-                .anyRequest().anonymous()
                 .and()
                 .httpBasic();
 
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, Flyway flyway, PasswordEncoder encoder) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth, Flyway flyway, BCryptPasswordEncoder encoder) throws Exception {
         flyway.migrate();
         String password = encoder.encode("password");
         auth.jdbcAuthentication()

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface AccountsRepository extends CrudRepository<Account, String> {
 
+    Account findByEmail(String login);
 }
