@@ -37,29 +37,9 @@ public class AccountsResource {
 
     @RequestMapping(
             value = {"users", "users/"},
-            method = RequestMethod.POST,
-            consumes = "application/x-www-form-urlencoded"
+            method = RequestMethod.POST
     )
-    public void update(@RequestParam("email") String email,
-                       @RequestParam("password") String password,
-                       @RequestParam("name") String name,
-                       @RequestParam("firstName") String firstName,
-                       @RequestParam(value = "communityId", required = false) Long communityId) {
-        Account user = new Account();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setName(name);
-        user.setFirstName(firstName);
-        user.setCommunity(communityRepository.findOne(communityId));
-        update(user);
-    }
-
-    @RequestMapping(
-            value = {"users", "users/"},
-            method = RequestMethod.POST,
-            consumes = "application/json"
-    )
-    public void update(@RequestBody Account user) {
+    public void register(@RequestBody Account user) {
         jdbcTemplate.update(
                 "insert into users(username, password, name, first_name, enabled, community) values (?, ?, ?, ?, true, ?);",
                 user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName(), user.getCommunityId());
