@@ -30,7 +30,6 @@ public class MessagesResource {
 
     @RequestMapping(value = {"timeline", "timeline/"},
             method = RequestMethod.GET,
-            headers = "Accept: */*",
             produces = "application/json; charset=utf-8")
     public Iterable<Message> findAllMessages() {
         return messagesRepository.findAll();
