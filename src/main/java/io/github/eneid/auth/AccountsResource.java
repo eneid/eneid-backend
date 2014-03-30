@@ -26,6 +26,10 @@ public class AccountsResource {
 
     @PostConstruct
     public void setUp() {
+        Account account = accountsRepository.findByEmail("o.girardot@lateral-thoughts.com");
+        account.setFirstName("Olivier");
+        account.setName("Girardot");
+        accountsRepository.save(account);
     }
 
     @RequestMapping(

@@ -3,12 +3,14 @@ package io.github.eneid.timeline;
 
 import io.github.eneid.actions.QuickAction;
 import io.github.eneid.actions.QuickActionsRepository;
+import io.github.eneid.auth.Account;
 import io.github.eneid.auth.AccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
 
 @RestController
@@ -26,6 +28,17 @@ public class MessagesResource {
         this.messagesRepository = messagesRepository;
         this.accountRepository = accountRepository;
         this.quickActionRepository = quickActionRepository;
+    }
+
+
+    @PostConstruct
+    public void setUp() {
+        Account account = accountRepository.findByEmail("o.girardot@lateral-thoughts.com");
+        Message message = new Message();
+        message.setContents("Je viens de la voir, il a bien mangé aujourd'hui, je repasserai ce soir.");
+        message.setDate(new Date());
+        message.setAuthor(account);
+        messagesRepository.save(message);
     }
 
     @RequestMapping(value = {"timeline", "timeline/"},
