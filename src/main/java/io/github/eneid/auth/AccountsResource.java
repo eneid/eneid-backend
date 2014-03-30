@@ -31,7 +31,7 @@ public class AccountsResource {
 
         Account account = accountsRepository.findByEmail(login);
         if (account == null || !encoder.matches(password, account.getPassword())) {
-            throw new RuntimeException("User not found");
+            throw new ResourceNotFoundException("User not found");
         }
     }
 
