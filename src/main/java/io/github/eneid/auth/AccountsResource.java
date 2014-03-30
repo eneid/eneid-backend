@@ -40,9 +40,10 @@ public class AccountsResource {
             method = RequestMethod.POST
     )
     public void register(@RequestBody Account user) {
+
         jdbcTemplate.update(
                 "insert into users(username, password, name, first_name, enabled, community) values (?, ?, ?, ?, true, ?);",
-                user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName(), user.getCommunityId());
+                user.getEmail(), encoder.encode(user.getPassword()), user.getName(), user.getFirstName(), user.getCommunity().getId());
 
         jdbcTemplate.update(
                 "insert into authorities(username, authority) values (?, ?);",

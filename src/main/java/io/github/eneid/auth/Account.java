@@ -3,6 +3,7 @@ package io.github.eneid.auth;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.eneid.community.Community;
+import io.github.eneid.invitations.Invitation;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,8 +17,7 @@ public class Account implements Serializable{
     private String name;
     private String password;
     private Community community;
-    private transient String communityId;
-
+    private Invitation invitation;
 
     @Id
     @Column(name = "username", nullable = false)
@@ -66,13 +66,13 @@ public class Account implements Serializable{
         this.community = community;
     }
 
-    @Transient
-    @JsonIgnore
-    public String getCommunityId() {
-        return communityId;
+    @ManyToOne
+    @JoinColumn(name = "invitation", nullable = true)
+    public Invitation getInvitation() {
+        return invitation;
     }
 
-    public void setCommunityId(String communityId) {
-        this.communityId = communityId;
+    public void setInvitation(Invitation invitation) {
+        this.invitation = invitation;
     }
 }

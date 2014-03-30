@@ -9,3 +9,6 @@ create table invitations(
 
 ALTER TABLE `invitations` ADD FOREIGN KEY (`community`) REFERENCES `communities`(`id`);
 ALTER TABLE `invitations` ADD FOREIGN KEY (`author`) REFERENCES `users`(`username`);
+
+ALTER TABLE users ADD COLUMN invitation bigint NULL;
+ALTER TABLE `users` ADD FOREIGN KEY (`invitation`) REFERENCES `invitations`(`id`);
