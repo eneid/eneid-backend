@@ -1,11 +1,14 @@
 package io.github.eneid.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.eneid.community.Community;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Account  {
 
     private String email;
@@ -13,7 +16,9 @@ public class Account  {
     private String name;
     private String password;
     private Community community;
-    private String communityId;
+
+    @JsonIgnore
+    private transient String communityId;
 
 
     @Id
@@ -63,6 +68,8 @@ public class Account  {
         this.community = community;
     }
 
+    @Transient
+    @JsonIgnore
     public String getCommunityId() {
         return communityId;
     }
