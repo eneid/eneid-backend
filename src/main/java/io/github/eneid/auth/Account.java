@@ -16,6 +16,7 @@ public class Account implements Serializable{
     private String firstName;
     private String name;
     private String password;
+    private boolean enabled;
     private Community community;
     private Invitation invitation;
 
@@ -74,5 +75,14 @@ public class Account implements Serializable{
 
     public void setInvitation(Invitation invitation) {
         this.invitation = invitation;
+    }
+
+    @Column(name = "enabled", nullable = false)
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

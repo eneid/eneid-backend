@@ -45,6 +45,7 @@ public class MessagesResource {
         account.setFirstName("Sebastian");
         account.setName("Le Merdy");
         account.setPassword("password");
+        account.setEnabled(true);
         accountRepository.save(account);
 
         message = new Message();
