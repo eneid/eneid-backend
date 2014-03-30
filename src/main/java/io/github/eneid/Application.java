@@ -37,17 +37,18 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    /*@Bean
+    @Bean
     public Module persistentEntityJackson2Module(ResourceMappings mappings,
                                                  Repositories repositories,
                                                  RepositoryRestConfiguration config,
                                                  UriToEntityConverter uriToEntityConverter) {
         return new PersistentEntityJackson2Module(mappings, repositories, config, uriToEntityConverter){
             {
-                //setSerializerModifier(null);
+                // spring data should not ignore association but... it does
+                setSerializerModifier(null);
                 //setDeserializerModifier(null);
             }
         };
-    }*/
+    }
 
 }
