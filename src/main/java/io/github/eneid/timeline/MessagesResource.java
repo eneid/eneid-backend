@@ -40,12 +40,9 @@ public class MessagesResource {
         message.setAuthor(account);
         messagesRepository.save(message);
 
-        account = new Account();
-        account.setEmail("sebastian.lemerdy@gmail.com");
+        account = accountRepository.findByEmail("sebastian.lemerdy@gmail.com");
         account.setFirstName("Sebastian");
         account.setName("Le Merdy");
-        account.setPassword("password");
-        account.setEnabled(true);
         accountRepository.save(account);
 
         message = new Message();

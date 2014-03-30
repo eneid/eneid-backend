@@ -46,6 +46,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(encoder)
                 .withUser("o.girardot@lateral-thoughts.com").password(password).roles("USER").and()
-                .withUser("admin").password(password).roles("USER", "ADMIN");
+                .withUser("sebastian.lemerdy@gmail.com").password(password).roles("USER", "ADMIN");
     }
 }
